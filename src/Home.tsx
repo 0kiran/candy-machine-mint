@@ -246,7 +246,7 @@ const Home = (props: HomeProps) => {
 
                 {wallet && (
                   <Item>
-                    <Card sx={{ minWidth: "10%", mx: "20%" }} variant="outlined">
+                    <Card sx={{ backgroundColor: '#121212', minWidth: "10%", mx: "20%" }} variant="outlined">
                       <Typography
                         sx={{ fontSize: 14 }}
                         color="white"
