@@ -47,17 +47,16 @@ export interface HomeProps {
   startDate: number;
   treasury: anchor.web3.PublicKey;
   txTimeout: number;
+  passphrase: string;
 }
 
 const Home = (props: HomeProps) => {
-  const passphrase = {
-    password: "welcometothejungle"
-  }
+  
 
   const { register, formState: { errors }, handleSubmit } = useForm();
   const [registered, setRegistered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(true);
-  const onSubmit = (data: any) => { String(data.passphrase) === passphrase.password ? setRegistered(true) : setIsCorrect(false) }
+  const onSubmit = (data: any) => { String(data.passphrase) === props.passphrase ? setRegistered(true) : setIsCorrect(false) }
 
   const [balance, setBalance] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
@@ -89,7 +88,6 @@ const Home = (props: HomeProps) => {
         goLiveDate,
         itemsAvailable,
         itemsRemaining,
-        itemsRedeemed,
       } = await getCandyMachineState(
         wallet as anchor.Wallet,
         props.candyMachineId,

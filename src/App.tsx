@@ -13,7 +13,7 @@ import {
   getSolletWallet,
   getSolletExtensionWallet,
 } from "@solana/wallet-adapter-wallets";
-
+ 
 import {
   ConnectionProvider,
   WalletProvider,
@@ -24,6 +24,10 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 
 const treasury = new anchor.web3.PublicKey(
   process.env.REACT_APP_TREASURY_ADDRESS!
+);
+
+const passphrase = String(
+  process.env.REACT_APP_PASSPHRASE!
 );
 
 const config = new anchor.web3.PublicKey(
@@ -102,6 +106,8 @@ const App = () => {
                 startDate={startDateSeed}
                 treasury={treasury}
                 txTimeout={txTimeout}
+                passphrase={passphrase}
+
               />
             </WalletDialogProvider>
           </WalletProvider>
