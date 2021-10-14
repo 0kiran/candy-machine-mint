@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Countdown from "react-countdown";
-import { Button, CircularProgress, Snackbar } from "@material-ui/core";
+import { Button, CircularProgress, Snackbar, TextField } from "@material-ui/core";
+import { Card, Stack } from "@mui/material";
+import Item from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import Alert from "@material-ui/lab/Alert";
+import Toolbar from '@mui/material/Toolbar';
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+
+import { useForm } from "react-hook-form";
 
 import * as anchor from "@project-serum/anchor";
 
+import solroyal from './soroyal.gif';
+import background from "./SOROYAL1.png";
+import discordlogo from "./discordimg.svg";
+
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+
 
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
@@ -37,13 +50,21 @@ export interface HomeProps {
 }
 
 const Home = (props: HomeProps) => {
+  const passphrase = {
+    password: "welcometothejungle"
+  }
+
+  const { register, formState: { errors }, handleSubmit } = useForm();
+  const [registered, setRegistered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(true);
+  const onSubmit = (data: any) => { String(data.passphrase) === passphrase.password ? setRegistered(true) : setIsCorrect(false) }
+
   const [balance, setBalance] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
 
   const [itemsAvailable, setItemsAvailable] = useState(0);
-  const [itemsRedeemed, setItemsRedeemed] = useState(0);
   const [itemsRemaining, setItemsRemaining] = useState(0);
 
   const [alertState, setAlertState] = useState<AlertState>({
@@ -56,6 +77,8 @@ const Home = (props: HomeProps) => {
 
   const wallet = useAnchorWallet();
   const [candyMachine, setCandyMachine] = useState<CandyMachine>();
+
+
 
   const refreshCandyMachineState = () => {
     (async () => {
@@ -75,7 +98,7 @@ const Home = (props: HomeProps) => {
 
       setItemsAvailable(itemsAvailable);
       setItemsRemaining(itemsRemaining);
-      setItemsRedeemed(itemsRedeemed);
+
 
       setIsSoldOut(itemsRemaining === 0);
       setStartDate(goLiveDate);
@@ -117,7 +140,6 @@ const Home = (props: HomeProps) => {
         }
       }
     } catch (error: any) {
-      // TODO: blech:
       let message = error.msg || "Minting failed! Please try again!";
       if (!error.msg) {
         if (error.message.indexOf("0x138")) {
@@ -166,60 +188,134 @@ const Home = (props: HomeProps) => {
   ]);
 
   return (
-    <main>
-      {wallet && (
-        <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
-      )}
 
-      {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
+    <main style={{
+      backgroundImage: `url(${background})`,
+    }}>
 
-      {wallet && <p>Total Available: {itemsAvailable}</p>}
+        <AppBar style={{ background: '#121212' }}  elevation={6}>
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <img style={{ maxHeight: 45 }} alt="solroyaltilogo" src={"solroyaltilogo.png"} />
+            </IconButton>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              OG SolRoyalti Project
+            </Typography>
+            <Button href="https://discord.gg/zAB5cMHPk2" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
+          </Toolbar>
+        </AppBar>
 
-      {wallet && <p>Redeemed: {itemsRedeemed}</p>}
+      <div className="contentBlock">
 
-      {wallet && <p>Remaining: {itemsRemaining}</p>}
+        <Stack spacing={2}>
+          <Item>
 
-      <MintContainer>
-        {!wallet ? (
-          <ConnectButton>Connect Wallet</ConnectButton>
-        ) : (
-          <MintButton
-            disabled={isSoldOut || isMinting || !isActive}
-            onClick={onMint}
-            variant="contained"
-          >
-            {isSoldOut ? (
-              "SOLD OUT"
-            ) : isActive ? (
-              isMinting ? (
-                <CircularProgress />
-              ) : (
-                "MINT"
-              )
-            ) : (
-              <Countdown
-                date={startDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
-            )}
-          </MintButton>
-        )}
-      </MintContainer>
+            <Card sx={{ backgroundColor: '#121212', mx: "25%", mt: "5%", minWidth: "50%" }} elevation={6}>
+              <Stack spacing={2}>
+                <div>
+                  <img src={solroyal} alt="SOLROYALTI" className="solroyal" />
+                </div>
 
-      <Snackbar
-        open={alertState.open}
-        autoHideDuration={6000}
-        onClose={() => setAlertState({ ...alertState, open: false })}
-      >
-        <Alert
+                {!registered && (
+                  <Item style={{ backgroundColor: '#121212' }}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div style={{ padding: 20 }}>
+                        {isCorrect ? <TextField id="outlined-basic" label="Passphrase" variant="outlined" {...register("passphrase", { required: true, maxLength: 20 })} />
+                          : <TextField
+                            error
+                            id="filled-error"
+                            label="Incorrect phrase"
+                            {...register("passphrase", { required: true, maxLength: 20 })}
+                          />}
+                      </div>
+
+                      {errors.passphrase?.type === 'required' && <div style={{ paddingBottom: 20 }}> <Typography color="white" variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                        Passphrase is required.
+                      </Typography></div>}
+
+
+                      <Button variant="contained" type="submit">Enter</Button>
+                    </form>
+                  </Item>
+                )}
+
+
+                {wallet && (
+                  <Item>
+                    <Card sx={{ minWidth: "10%", mx: "20%" }} variant="outlined">
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        color="white"
+                        gutterBottom
+                      >
+                        <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
+                        <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
+                        <p>Remaining: {itemsRemaining} out of {itemsAvailable}</p>
+                      </Typography>
+                    </Card>
+                  </Item>
+                )}
+
+
+                {registered ? (
+                  <Item>
+                    <MintContainer>
+                      {!wallet ? (
+                        <ConnectButton style={{ marginBottom: "2%" }}>Connect Wallet</ConnectButton>
+                      ) : (
+                        <MintButton
+                          disabled={isSoldOut || isMinting || !isActive}
+                          onClick={onMint}
+                          style={{ marginBottom: 10 }}
+                          variant="contained"
+                        >
+                          {isSoldOut ? (
+                            "SOLD OUT"
+                          ) : isActive ? (
+                            isMinting ? (
+                              <CircularProgress />
+                            ) : (
+                              "MINT"
+                            )
+                          ) : (
+                            <Countdown
+                              date={startDate}
+                              onMount={({ completed }) => completed && setIsActive(true)}
+                              onComplete={() => setIsActive(true)}
+                              renderer={renderCounter}
+                            />
+                          )}
+                        </MintButton>
+                      )}
+                    </MintContainer>
+                    
+                  </Item>
+                ) : <div></div>}
+
+              </Stack>
+              
+            </Card>
+          </Item>
+        </Stack>
+        <Snackbar
+          open={alertState.open}
+          autoHideDuration={6000}
           onClose={() => setAlertState({ ...alertState, open: false })}
-          severity={alertState.severity}
         >
-          {alertState.message}
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={() => setAlertState({ ...alertState, open: false })}
+            severity={alertState.severity}
+          >
+            {alertState.message}
+          </Alert>
+        </Snackbar>
+      </div>
     </main>
   );
 };
@@ -237,5 +333,6 @@ const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
     </CounterText>
   );
 };
+
 
 export default Home;

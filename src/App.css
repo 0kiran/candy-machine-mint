@@ -1,3 +1,54 @@
+html,body {
+  height:100%;
+}
+
+#root {
+  height:100%;
+}
+
+
 .App {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.Home {
+  position: relative;
+  color: black;
+}
+
+.Home::after {
+  opacity: 0.8;
+  background-blend-mode: luminosity;
+  background: url(SOROYAL1.png) no-repeat center center fixed;
+}
+
+.solroyal {
+  max-width:40%;
+  width: auto;
+  height: auto;
+  padding: 35px;
+}
+
+main {
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat
+}
+
+main::before {
+  opacity: 0.75;
+}
+
+.passphrasetxt {
+  padding: 10px;
 }

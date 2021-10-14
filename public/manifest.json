@@ -13,6 +13,11 @@
       "sizes": "192x192"
     },
     {
+      "src": "soroyal.GIF",
+      "type": "image/gif",
+      "sizes": "765x1020"
+    },
+    {
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
