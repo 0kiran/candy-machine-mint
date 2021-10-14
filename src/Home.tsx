@@ -203,7 +203,7 @@ const Home = (props: HomeProps) => {
               <img style={{ maxHeight: 45 }} alt="solroyaltilogo" src={"solroyaltilogo.png"} />
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Welcome OG Royalti
+              Welcome SolRoyalti
             </Typography>
             <Button href="https://discord.gg/zAB5cMHPk2" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
           </Toolbar>
