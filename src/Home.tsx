@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 
 import * as anchor from "@project-serum/anchor";
 
+// ASSETS
 import lanafrogs from './lanafrogs.gif';
 import background from "./bbackground.png";
 import discordlogo from "./discordimg.svg";
