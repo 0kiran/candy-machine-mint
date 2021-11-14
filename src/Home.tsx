@@ -204,7 +204,7 @@ const Home = (props: HomeProps) => {
               <img style={{ maxHeight: 45 }} className={"lanafrogslogo"} alt="lanafrogslogo" src={"lanafrogslogo.png"} />
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Lana Frogs NFT - Presale Mint
+              Lana Frogs NFT
             </Typography>
             <Button href="https://discord.gg/gZn3sB56Jh" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
           </Toolbar>
