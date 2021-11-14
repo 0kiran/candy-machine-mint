@@ -25,10 +25,10 @@ html,body {
 .Home::after {
   opacity: 0.8;
   background-blend-mode: luminosity;
-  background: url(SOROYAL1.png) no-repeat center center fixed;
+  background: url(bbackground.png) no-repeat center fixed;
 }
 
-.solroyal {
+.lanafrog {
   max-width:40%;
   width: auto;
   height: auto;
@@ -40,8 +40,8 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 100%;
-  background-size: cover;
-  background-position: center center;
+  background-position: center top;
+  background-size: 100% auto;
   background-repeat: no-repeat
 }
 

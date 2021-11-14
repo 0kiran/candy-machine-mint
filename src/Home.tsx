@@ -14,8 +14,8 @@ import { useForm } from "react-hook-form";
 
 import * as anchor from "@project-serum/anchor";
 
-import solroyal from './soroyal.gif';
-import background from "./SOROYAL1.png";
+import lanafrogs from './lanafrogs.gif';
+import background from "./bbackground.png";
 import discordlogo from "./discordimg.svg";
 
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
@@ -200,12 +200,12 @@ const Home = (props: HomeProps) => {
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              <img style={{ maxHeight: 45 }} alt="solroyaltilogo" src={"solroyaltilogo.png"} />
+              <img style={{ maxHeight: 45 }} className={"lanafrogslogo"} alt="lanafrogslogo" src={"lanafrogslogo.png"} />
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Welcome SolRoyalti
+              Lana Frogs NFT - Presale Mint
             </Typography>
-            <Button href="https://discord.gg/zAB5cMHPk2" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
+            <Button href="https://discord.gg/gZn3sB56Jh" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
           </Toolbar>
         </AppBar>
 
@@ -217,7 +217,7 @@ const Home = (props: HomeProps) => {
             <Card sx={{ backgroundColor: '#121212', mx: "25%", mt: "5%", minWidth: "50%" }} elevation={6}>
               <Stack spacing={2}>
                 <div>
-                  <img src={solroyal} alt="SOLROYALTI" className="solroyal" />
+                  <img src={lanafrogs} alt="LANAFROGS" className="lanafrog" />
                 </div>
 
                 {!registered && (
