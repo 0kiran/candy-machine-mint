@@ -58,6 +58,7 @@ const Home = (props: HomeProps) => {
   const [registered, setRegistered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(true);
   const onSubmit = (data: any) => { String(data.passphrase) === props.passphrase ? setRegistered(true) : setIsCorrect(false) }
+  // const onSubmit = (data: any) => {setRegistered(true)}
 
   const [balance, setBalance] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
@@ -204,7 +205,7 @@ const Home = (props: HomeProps) => {
               <img style={{ maxHeight: 45 }} className={"lanafrogslogo"} alt="lanafrogslogo" src={"lanafrogslogo.png"} />
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Lana Frogs NFT
+              Lana Frogs NFT - Presale Mint
             </Typography>
             <Button href="https://discord.gg/gZn3sB56Jh" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
           </Toolbar>
