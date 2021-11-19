@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Countdown from "react-countdown";
-import { Button, CircularProgress, Snackbar, TextField } from "@material-ui/core";
+import { Button, CircularProgress, Snackbar} from "@material-ui/core";
 import { Card, Stack } from "@mui/material";
 import Item from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -54,11 +54,12 @@ export interface HomeProps {
 const Home = (props: HomeProps) => {
   
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  // const { register, formState: { errors }, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const [registered, setRegistered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(true);
-  const onSubmit = (data: any) => { String(data.passphrase) === props.passphrase ? setRegistered(true) : setIsCorrect(false) }
-  // const onSubmit = (data: any) => {setRegistered(true)}
+  // const [isCorrect, setIsCorrect] = useState(true);
+  // const onSubmit = (data: any) => { String(data.passphrase) === props.passphrase ? setRegistered(true) : setIsCorrect(false) }
+  const onSubmit = (data: any) => {setRegistered(true)}
 
   const [balance, setBalance] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
@@ -205,7 +206,7 @@ const Home = (props: HomeProps) => {
               <img style={{ maxHeight: 45 }} className={"lanafrogslogo"} alt="lanafrogslogo" src={"lanafrogslogo.png"} />
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Lana Frogs NFT - Presale Mint
+              Lana Frogs NFT
             </Typography>
             <Button href="https://discord.gg/gZn3sB56Jh" color="inherit"><img style={{ maxHeight: 35 }} alt="join our discord!" src={discordlogo} /></Button>
           </Toolbar>
@@ -225,7 +226,7 @@ const Home = (props: HomeProps) => {
                 {!registered && (
                   <Item style={{ backgroundColor: '#121212' }}>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <div style={{ padding: 20 }}>
+                      {/* <div style={{ padding: 20 }}>
                         {isCorrect ? <TextField id="outlined-basic" label="Passphrase" variant="outlined" {...register("passphrase", { required: true, maxLength: 20 })} />
                           : <TextField
                             error
@@ -237,7 +238,7 @@ const Home = (props: HomeProps) => {
 
                       {errors.passphrase?.type === 'required' && <div style={{ paddingBottom: 20 }}> <Typography color="white" variant="body1" component="div" sx={{ flexGrow: 1 }}>
                         Passphrase is required.
-                      </Typography></div>}
+                      </Typography></div>} */}
 
 
                       <Button variant="contained" type="submit">Enter</Button>
